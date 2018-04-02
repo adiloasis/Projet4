@@ -85,4 +85,14 @@ class NewsController extends BackController
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
   }
+  public function executeSignalerComment(HTTPRequest $request){
+
+    $commentManager = $this->managers->getManagerOf('Comments');
+    $commentaire = $commentManager->get($request->getData('comment'));
+    $commentManager->signaler($commentaire['id']);
+    $this->app->user()->setFlash('Le commentaire a bien été signalé, merci !');
+    $this->app->httpResponse()->redirect('news-'.$commentaire['news'].'.html');
+   
+
+  }
 }

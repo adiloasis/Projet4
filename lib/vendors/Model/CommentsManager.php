@@ -57,11 +57,20 @@ abstract class CommentsManager extends Manager
    * @return void
    */
   abstract protected function modify(Comment $comment);
-  
+
+  /**
+   * Méthode permettant de modifier un commentaire.
+   * @param $comment Le commentaire à modifier
+   * @return void
+   */
+  abstract protected function getList();
+
   /**
    * Méthode permettant d'obtenir un commentaire spécifique.
    * @param $id L'identifiant du commentaire
    * @return Comment
    */
   abstract public function get($id);
+
+  abstract public function signaler($id);
 }

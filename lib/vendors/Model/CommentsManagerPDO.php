@@ -51,6 +51,23 @@ class CommentsManagerPDO extends CommentsManager
     return $comments;
   }
 
+  public function getList()
+  {
+    
+    $q = $this->dao->prepare('SELECT id, news, auteur, contenu, date, signaler FROM comments ORDER BY signaler DESC');
+    $q->execute();
+    
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+    
+    $comments = $q->fetchAll();
+    
+    foreach ($comments as $comment)
+    {
+      $comment->setDate(new \DateTime($comment->date()));
+    }
+    
+    return $comments;
+  }
   protected function modify(Comment $comment)
   {
     $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id = :id');
@@ -71,5 +88,14 @@ class CommentsManagerPDO extends CommentsManager
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
     
     return $q->fetch();
+  }
+
+
+  public function signaler($id){
+
+    $q = $this->dao->prepare('UPDATE comments SET signaler = 1 WHERE id = :id ');
+    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $q->execute();
+   
   }
 }

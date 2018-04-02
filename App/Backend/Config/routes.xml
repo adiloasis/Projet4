@@ -4,6 +4,10 @@
   <route url="/admin/news-insert\.html" module="News" action="insert" />
   <route url="/admin/news-update-([0-9]+)\.html" module="News" action="update" vars="id" />
   <route url="/admin/news-delete-([0-9]+)\.html" module="News" action="delete" vars="id" />
-  <route url="/admin/comment-update-([0-9]+)\.html" module="News" action="updateComment" vars="id" />
-  <route url="/admin/comment-delete-([0-9]+)\.html" module="News" action="deleteComment" vars="id" />
+  <route url="/commentaires/" module="Commentaires" action="index" />
+  <route url="/admin/commentaires/comment-update-([0-9]+)\.html" module="Commentaires" action="updateComment" vars="id" />
+  <route url="/admin/commentaires/comment-delete-([0-9]+)\.html" module="Commentaires" action="deleteComment" vars="id" />
+  <route url="/admin/commentaires/" module="Commentaires" action="index" />
+  <route url="/admin/deconnexion\.html" module="Connexion" action="deconnexion" ></route>
+  
 </routes>
